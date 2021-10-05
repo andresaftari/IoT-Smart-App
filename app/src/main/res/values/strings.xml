@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">IoT Smart App</string>
+
+    <!-- Title -->
+    <string name="title_environment">Environment</string>
+    <string name="title_energy">Energy</string>
+    <string name="title_oxygen">Oxygen</string>
+
+    <!-- Text -->
+    <string name="text_welcome">Welcome!</string>
+    <string name="text_login_hint">Login to continue</string>
+    <string name="text_forgot_pass">Forgot your password?</string>
+    <string name="text_google_signin">Sign in with Google</string>
+    <string name="text_not_signup">Don’t have account yet? <font fgcolor="#7059FF">Sign up now!</font></string>
+
+    <string name="text_acidic_level">TINGKAT KEASAMAN</string>
+    <string name="text_tds_level">TDS</string>
+    <string name="text_ph_level">pH Level</string>
+    <string name="text_current_water">Current Water Level</string>
+    <string name="text_current_gate">Current Gate Level</string>
+    <string name="text_pump_status">Pump Status</string>
+    <string name="text_gate_status">Gate Status</string>
+
+    <string name="text_acid">ACIDIC</string>
+    <string name="text_alkaline">ALKALINE</string>
+    <string name="text_neutral">NEUTRAL</string>
+
+    <!-- Hint -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+
+    <!-- Button -->
+    <string name="button_login">LOG IN</string>
+    <string name="text_contamination_status">Contamination Status</string>
+</resources>
