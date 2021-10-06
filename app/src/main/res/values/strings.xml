@@ -8,16 +8,24 @@
 
     <!-- Text -->
     <string name="text_welcome">Welcome!</string>
+    <string name="text_signup">Sign Up</string>
+
     <string name="text_login_hint">Login to continue</string>
+    <string name="text_signup_hint">Create your account. It’s free!</string>
+
     <string name="text_forgot_pass">Forgot your password?</string>
     <string name="text_google_signin">Sign in with Google</string>
+
     <string name="text_not_signup">Don’t have account yet? <font fgcolor="#7059FF">Sign up now!</font></string>
+    <string name="text_not_signin">Have an account? <font fgcolor="#7059FF">Login here!</font></string>
+    <string name="text_oneapp_alldevices"><font fgcolor="#E42028">One</font> App.\n<font fgcolor="#E42028">All</font> Devices!</string>
 
     <string name="text_acidic_level">TINGKAT KEASAMAN</string>
     <string name="text_tds_level">TDS</string>
     <string name="text_ph_level">pH Level</string>
     <string name="text_current_water">Current Water Level</string>
     <string name="text_current_gate">Current Gate Level</string>
+    <string name="text_contamination_status">Contamination Status</string>
     <string name="text_pump_status">Pump Status</string>
     <string name="text_gate_status">Gate Status</string>
 
@@ -27,9 +35,13 @@
 
     <!-- Hint -->
     <string name="hint_username">Username</string>
+    <string name="hint_fullname">Fullname</string>
+    <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
+    <string name="hint_cpassword">Confirm Password</string>
 
     <!-- Button -->
     <string name="button_login">LOG IN</string>
-    <string name="text_contamination_status">Contamination Status</string>
+    <string name="button_signup">SIGN UP</string>
+    <string name="button_started">GET STARTED</string>
 </resources>

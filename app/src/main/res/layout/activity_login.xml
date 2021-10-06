@@ -8,11 +8,11 @@
 
     <TextView
         android:id="@+id/login_title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="?attr/actionBarSize"
         android:text="@string/text_welcome"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -114,13 +114,13 @@
 
     <!-- Other Login -->
     <TextView
-        android:id="@+id/tv_signup_hint"
+        android:id="@+id/tv_signin_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="8dp"
         android:text="@string/text_not_signup"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:text="@string/text_google_signin"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@color/darkPrimaryColor"
         android:textSize="16sp"
         android:textStyle="bold"
