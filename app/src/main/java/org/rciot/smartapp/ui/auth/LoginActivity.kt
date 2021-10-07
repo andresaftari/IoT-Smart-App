@@ -18,8 +18,7 @@ class LoginActivity : AppCompatActivity() {
 
         with(binding) {
             btnLogin.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
+                setData()
             }
             tvSigninHint.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
@@ -33,8 +32,6 @@ class LoginActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
-        setData()
     }
 
     private fun setData() {
@@ -54,7 +51,10 @@ class LoginActivity : AppCompatActivity() {
                 error = "Please fill your password"
                 requestFocus()
             }
-            else -> startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            else -> {
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                finish()
+            }
         }
     }
 }

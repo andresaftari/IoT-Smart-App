@@ -18,8 +18,7 @@ class RegisterActivity : AppCompatActivity() {
 
         with(binding) {
             btnSignup.setOnClickListener {
-                startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
-                finish()
+                setData()
             }
             tvSignupHint.setOnClickListener {
                 startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
@@ -33,8 +32,6 @@ class RegisterActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
-        setData()
     }
 
     private fun setData() {
@@ -75,12 +72,15 @@ class RegisterActivity : AppCompatActivity() {
                 error = "Please fill confirm password"
                 requestFocus()
             }
-            else -> startActivity(
-                Intent(
-                    this@RegisterActivity,
-                    MainActivity::class.java
+            else -> {
+                startActivity(
+                    Intent(
+                        this@RegisterActivity,
+                        MainActivity::class.java
+                    )
                 )
-            )
+                finish()
+            }
         }
     }
 }
