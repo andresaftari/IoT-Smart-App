@@ -203,10 +203,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <TextView
                 android:id="@+id/switch_pump"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                tools:text="OFF"
+                android:textSize="18sp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pumpStatus" />
@@ -224,11 +226,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/switch_pump" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <TextView
                 android:id="@+id/switch_gate"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
+                android:textSize="18sp"
+                tools:text="OFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/gateStatus" />
 

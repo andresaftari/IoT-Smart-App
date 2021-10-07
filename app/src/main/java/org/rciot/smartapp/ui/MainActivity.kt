@@ -84,13 +84,32 @@ class MainActivity : AppCompatActivity() {
 
                             // Set water pump & gate status
                             when (data.Pump1Status!!.toInt()) {
-                                0 -> switchPump.isChecked = false
-                                1 -> switchPump.isChecked = true
+                                0 -> switchPump.apply {
+                                    text = "OFF"
+                                    setTextColor(resources.getColor(R.color.tds_danger))
+                                }
+                                1 -> switchPump.apply {
+                                    text = "ON"
+                                    setTextColor(resources.getColor(R.color.tds_safe))
+                                }
                             }
 
                             when (data.Gate1Status!!.toInt()) {
-                                0 -> switchGate.isChecked = false
-                                1 -> switchGate.isChecked = true
+                                0 -> switchGate.apply {
+                                    text = "OFF"
+                                    setTextColor(resources.getColor(R.color.tds_danger))
+                                }
+                                1 -> switchGate.apply {
+                                    text = "ON"
+                                    setTextColor(resources.getColor(R.color.tds_safe))
+                                }
+                                else -> {
+                                    switchGate.apply {
+                                        text = "OFF"
+                                        setTextColor(resources.getColor(R.color.tds_danger))
+                                    }
+                                    Log.d("GATE_STATUS", "No Data")
+                                }
                             }
                         }
 

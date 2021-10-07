@@ -33,6 +33,9 @@
     <string name="text_alkaline">ALKALINE</string>
     <string name="text_neutral">NEUTRAL</string>
 
+    <string name="text_off">OFF</string>
+    <string name="text_on">ON</string>
+
     <!-- Hint -->
     <string name="hint_username">Username</string>
     <string name="hint_fullname">Fullname</string>
