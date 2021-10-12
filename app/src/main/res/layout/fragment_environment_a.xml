@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.environmentA.EnvironmentAFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/pb_loading"
+            style="@style/SpinKitView.Circle"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:SpinKit_Color="@color/darkPrimaryColor"
+            android:visibility="visible" />
+
+        <!-- Acid Card -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_acid"
+            android:layout_width="390dp"
+            android:layout_height="243dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/env_background_mini"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/pb_circular_acid"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_circle"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/pb_progress_circular_acid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:progress="30" />
+
+            <TextView
+                android:id="@+id/phLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="@string/text_ph_level"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@id/pb_circular_acid"
+                app:layout_constraintEnd_toEndOf="@id/pb_circular_acid"
+                app:layout_constraintStart_toStartOf="@id/pb_circular_acid"
+                app:layout_constraintTop_toTopOf="@id/pb_circular_acid" />
+
+            <TextView
+                android:id="@+id/tv_phLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="#ACCCF8"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@id/pb_circular_acid"
+                app:layout_constraintEnd_toEndOf="@id/pb_circular_acid"
+                app:layout_constraintStart_toStartOf="@id/pb_circular_acid"
+                app:layout_constraintTop_toTopOf="@id/pb_circular_acid"
+                tools:text="5.5" />
+
+            <TextView
+                android:id="@+id/acidLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/text_acidic_level"
+                android:textColor="@color/darkPrimaryColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/pb_circular_acid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.294" />
+
+            <View
+                android:id="@+id/underline"
+                android:layout_width="140dp"
+                android:layout_height="1dp"
+                android:background="@color/darkPrimaryColor"
+                app:layout_constraintEnd_toEndOf="@id/acidLevel"
+                app:layout_constraintStart_toStartOf="@id/acidLevel"
+                app:layout_constraintTop_toBottomOf="@id/acidLevel" />
+
+            <TextView
+                android:id="@+id/tv_level_acid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/pb_circular_acid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/underline"
+                app:layout_constraintVertical_bias="0.05"
+                tools:text="ACIDIC" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- TDS Card -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_tds"
+            android:layout_width="match_parent"
+            android:layout_height="468dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="96dp"
+            android:background="@drawable/env_background_chart">
+
+            <!-- Water Level -->
+            <TextView
+                android:id="@+id/gateLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/text_current_water"
+                android:textColor="@color/darkPrimaryColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_current_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="#003ED1"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gateLevel"
+                tools:text="30 cm" />
+
+            <TextView
+                android:id="@+id/tempLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_current_temp"
+                android:textColor="@color/darkPrimaryColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_current_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="#003ED1"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tempLevel"
+                app:layout_constraintVertical_bias="0.05"
+                tools:text="30°C" />
+
+            <View
+                android:id="@+id/separatorTop"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/primaryColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_current_temp" />
+
+            <!-- Ppm Level -->
+            <ProgressBar
+                android:id="@+id/pb_tds"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_circle"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/pb_progress_circular_tds"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separatorTop"
+                tools:progress="80" />
+
+            <TextView
+                android:id="@+id/tdsLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="@string/text_tds_level"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/pb_tds"
+                app:layout_constraintEnd_toEndOf="@id/pb_tds"
+                app:layout_constraintStart_toStartOf="@id/pb_tds"
+                app:layout_constraintTop_toTopOf="@id/pb_tds" />
+
+            <TextView
+                android:id="@+id/tv_tds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="#FEE24D"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/pb_tds"
+                app:layout_constraintEnd_toEndOf="@id/pb_tds"
+                app:layout_constraintStart_toStartOf="@id/pb_tds"
+                app:layout_constraintTop_toTopOf="@id/pb_tds"
+                tools:text="2350ppm" />
+
+            <ImageView
+                android:id="@+id/tds_color"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="-32dp"
+                android:scaleType="center"
+                android:src="@drawable/env_tds_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separatorTop" />
+
+            <TextView
+                android:id="@+id/tdsIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_contamination_status"
+                android:textColor="@color/darkPrimaryColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/pb_tds"
+                app:layout_constraintTop_toBottomOf="@id/tds_color" />
+
+            <TextView
+                android:id="@+id/tv_current_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toEndOf="@id/pb_tds"
+                app:layout_constraintTop_toBottomOf="@id/tdsIndicator"
+                tools:text="Dangerous"
+                tools:textColor="#D52845" />
+
+            <View
+                android:id="@+id/separatorBottom"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/primaryColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pb_tds" />
+
+            <!-- Chart -->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separatorBottom" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>

@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
             override fun run() {
                 try {
                     sleep(4000)
-                    startActivity(Intent(baseContext, LoginActivity::class.java))
+                    startActivity(Intent(baseContext, WelcomeActivity::class.java))
                     finish()
                 } catch (ex: Exception) {
                     Log.d("SplashIsFailed", "Kalo Gagal")

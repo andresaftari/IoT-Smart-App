@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IoTSmartApp">
         <activity
+            android:name=".ui.WelcomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.IoTSmartApp.NoActionBar" />
+        <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.IoTSmartApp.NoActionBar">
