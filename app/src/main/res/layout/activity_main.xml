@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@color/white"
-        android:theme="@style/Theme.TelUNyarios.AppBarOverlay">
+        android:theme="@style/Theme.IoTSmartApp.AppBarOverlay">
 
         <TextView
             android:id="@+id/title"
