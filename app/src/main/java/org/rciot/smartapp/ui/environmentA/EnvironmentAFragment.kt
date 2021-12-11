@@ -52,6 +52,7 @@ class EnvironmentAFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         listOfData.clear()
+
         displayLevelTDS()
         setupChart()
         fetchTDSData()
@@ -60,15 +61,22 @@ class EnvironmentAFragment : Fragment() {
     private fun setupChart() = with(binding.chart) {
         setNoDataText("No TDS Data")
 
-        xAxis.setDrawLabels(false)
-        xAxis.setDrawAxisLine(false)
-        xAxis.setDrawGridLines(true)
+        xAxis.apply {
+            setDrawLabels(false)
+            setDrawAxisLine(false)
+            setDrawGridLines(true)
+        }
 
-        axisLeft.setDrawGridLines(false)
-        axisLeft.axisMinimum = 0f
-        axisLeft.axisMaximum = 1000f
-        description.isEnabled = false
-        description.text = ""
+        axisLeft.apply {
+            setDrawGridLines(false)
+            axisMinimum = 0f
+            axisMaximum = 1000f
+        }
+
+        description.apply {
+            isEnabled = false
+            text = ""
+        }
 
         animateX(1000, Easing.EaseInSine)
 
@@ -213,21 +221,31 @@ class EnvironmentAFragment : Fragment() {
                             if (data.tds!! <= 200)
                                 tvCurrentStatus.apply {
                                     text = "Normal"
-                                    setTextColor(resources.getColor(R.color.tds_normal))
+                                    setTextColor(
+                                        ContextCompat.getColor(
+                                            context,
+                                            R.color.tds_normal
+                                        )
+                                    )
                                 }
                             if (data.tds > 200 && data.tds <= 1300)
                                 tvCurrentStatus.apply {
                                     text = "Safe"
-                                    setTextColor(resources.getColor(R.color.tds_safe))
+                                    setTextColor(ContextCompat.getColor(context, R.color.tds_safe))
                                 }
                             if (data.tds > 1300 && data.tds <= 1700)
                                 tvCurrentStatus.apply {
                                     text = "Cautious"
-                                    setTextColor(resources.getColor(R.color.tds_cautious))
+                                    setTextColor(
+                                        ContextCompat.getColor(
+                                            context,
+                                            R.color.tds_cautious
+                                        )
+                                    )
                                 }
                             if (data.tds > 1700) tvCurrentStatus.apply {
                                 text = "Dangerous"
-                                setTextColor(resources.getColor(R.color.tds_danger))
+                                setTextColor(ContextCompat.getColor(context, R.color.tds_danger))
                             }
 
                             val percentage = (data.tds / 2500) * 100
