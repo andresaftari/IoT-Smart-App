@@ -6,6 +6,10 @@
     <string name="title_env_b">Lini B</string>
     <string name="title_limbah">Limbah</string>
 
+    <string name="title_env_a_updated">Utility</string>
+    <string name="title_env_b_updated">Lini A</string>
+    <string name="title_limbah_updated">Lini B</string>
+
     <!-- Text -->
     <string name="text_welcome">Welcome!</string>
     <string name="text_signup">Sign Up</string>

@@ -6,44 +6,32 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class LimbahResponseC(
-    @field:SerializedName("Gate3Level")
-    val gate3Level: Double? = 0.0,
+    @field:SerializedName("Gate 1 Level")
+    val gateLevel: Double? = 0.0,
 
-    @field:SerializedName("Gate3Status")
-    val gate3Status: Double? = 0.0,
+    @field:SerializedName("TDS")
+    val tds: Double? = 0.0,
 
-    @field:SerializedName("Pump3Status")
-    val pump3Status: Double? = 0.0,
+    @field:SerializedName("Temperature")
+    val temp: Double? = 0.0,
 
-    @field:SerializedName("TDS3")
-    val tds3: Double? = 0.0,
-
-    @field:SerializedName("Tank3Level")
-    val tank3Level: Double? = 0.0,
-
-    @field:SerializedName("pH3")
-    val pH3: Double? = 0.0
+    @field:SerializedName("PH")
+    val pH: Double? = 0.0
 ) : Parcelable
 
 @Parcelize
 data class LimbahResponseB(
-    @field:SerializedName("Gate2Level")
-    val gate2Level: Double? = 0.0,
+    @field:SerializedName("Gate 1 Level")
+    val gateLevel: Double? = 0.0,
 
-    @field:SerializedName("Gate2Status")
-    val gate2Status: Double? = 0.0,
+    @field:SerializedName("TDS")
+    val tds: Double? = 0.0,
 
-    @field:SerializedName("Pump2Status")
-    val pump2Status: Double? = 0.0,
+    @field:SerializedName("Temperature")
+    val temp: Double? = 0.0,
 
-    @field:SerializedName("TDS2")
-    val tds2: Double? = 0.0,
-
-    @field:SerializedName("Tank2Level")
-    val tank2Level: Double? = 0.0,
-
-    @field:SerializedName("pH2")
-    val pH2: Double? = 0.0
+    @field:SerializedName("PH")
+    val pH: Double? = 0.0
 ) : Parcelable
 
 @Parcelize

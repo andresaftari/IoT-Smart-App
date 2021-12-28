@@ -45,6 +45,8 @@ class EnvironmentCFragment : Fragment() {
         binding = FragmentEnvironmentCBinding.inflate(layoutInflater, container, false)
         antaresHTTPAPI = AntaresHTTPAPI()
 
+        setupChart()
+
         return binding.root
     }
 
@@ -57,18 +59,25 @@ class EnvironmentCFragment : Fragment() {
         fetchTDSData()
     }
 
-    private fun setupChart() = with(binding.chart) {
+    private fun setupChart() = with(binding.chartC) {
         setNoDataText("No TDS Data")
 
-        xAxis.setDrawLabels(false)
-        xAxis.setDrawAxisLine(false)
-        xAxis.setDrawGridLines(true)
+        xAxis.apply {
+            setDrawLabels(false)
+            setDrawAxisLine(false)
+            setDrawGridLines(true)
+        }
 
-        axisLeft.setDrawGridLines(false)
-        axisLeft.axisMinimum = 0f
-        axisLeft.axisMaximum = 1000f
-        description.isEnabled = false
-        description.text = ""
+        axisLeft.apply {
+            setDrawGridLines(false)
+            axisMinimum = 0f
+            axisMaximum = 1000f
+        }
+
+        description.apply {
+            isEnabled = false
+            text = ""
+        }
 
         animateX(1000, Easing.EaseInSine)
 
@@ -105,7 +114,7 @@ class EnvironmentCFragment : Fragment() {
 
         val data = LineData(dataset)
 
-        binding.chart.apply {
+        binding.chartC.apply {
             this.data = data
             this.invalidate()
         }
@@ -121,16 +130,16 @@ class EnvironmentCFragment : Fragment() {
                 if (listOfData.isEmpty()) it.dataList!!.forEach { item -> listOfData.add(item) }
                 val tdsList = ArrayList<String>()
 
-                for (i in 0..40) {
+                for (i in 0..10) {
                     Log.d("chart_dataC", listOfData[i])
 
                     getDeviceData(listOfData[i])
                     deviceData.observe(viewLifecycleOwner) { device ->
                         Log.d("chart_device_datasetC", "${device.data.con}")
-                        if (device.data.con!!.contains("TDS3")) {
+                        if (device.data.con!!.contains("TDS")) {
 
                             val jsonBody = JSONObject(device.data.con)
-                            val dataTDS = jsonBody.getString("TDS3")
+                            val dataTDS = jsonBody.getString("TDS")
 
                             tdsList.add(dataTDS)
                         }
@@ -158,80 +167,83 @@ class EnvironmentCFragment : Fragment() {
                     handler.post {
                         // pH check
                         with(binding) {
-                            Log.d(ENV_pH_CHECK_C, data.pH3.toString())
+                            Log.d(ENV_pH_CHECK_C, data.pH.toString())
 
                             // Set pH value on screen
-                            tvPhLevel.text = data.pH3.toString()
+                            tvPhLevel.text = data.pH.toString()
 
                             // Set pH level on screen
-                            if (data.pH3!! >= 1.0 && data.pH3 < 7.0)
+                            if (data.pH!! >= 1.0 && data.pH < 7.0)
                                 tvLevelAcid.text = getString(R.string.text_acid)
-                            else if (data.pH3 > 7.0 && data.pH3 <= 14.0)
+                            else if (data.pH > 7.0)
                                 tvLevelAcid.text = getString(R.string.text_alkaline)
-                            else if (data.pH3 == 7.0)
+                            else if (data.pH == 7.0)
                                 tvLevelAcid.text = getString(R.string.text_neutral)
 
                             // Set circular chart percentage on screen
-                            val value = (data.pH3 / 14.0) * 100
+                            val value = (data.pH / 14.0) * 100
                             pbCircularAcid.setProgress(value.toInt(), true)
                         }
 
                         // Water check
                         with(binding) {
-                            Log.d(ENV_WATER_CHECK_C, data.tank3Level.toString())
-                            Log.d(ENV_GATE_CHECK_C, data.gate3Level.toString())
+                            Log.d(ENV_GATE_CHECK_C, data.gateLevel.toString())
 
-                            // Set water & gate value on screen
-                            tvCurrentWater.text = when (data.tank3Level) {
+                            tvCurrentWater.text = when (data.gateLevel) {
                                 0.0 -> "0 cm"
-                                else -> "${data.tank3Level} cm"
+                                else -> "${data.gateLevel} cm"
                             }
-                            tvCurrentGate.text = when (data.gate3Level) {
-                                0.0 -> "0 cm"
-                                else -> "${data.gate3Level} cm"
-                            }
+                        }
 
-                            // Set water pump & gate status
-                            when (data.pump3Status!!.toInt()) {
-                                0 -> switchPump.isChecked = false
-                                1 -> switchPump.isChecked = true
-                            }
+                        // Temp Check
+                        with(binding) {
+                            Log.d(ENV_GATE_CHECK_C, data.gateLevel.toString())
 
-                            when (data.gate3Status!!.toInt()) {
-                                0 -> switchGate.isChecked = false
-                                1 -> switchGate.isChecked = true
+                            tvCurrentTemp.text = when (data.temp) {
+                                0.0 -> "0°C"
+                                else -> "${data.temp}°C"
                             }
                         }
 
                         // Ppm Check
                         with(binding) {
-                            Log.d(ENV_PPM_CHECK_C, data.tds3.toString())
+                            Log.d(ENV_PPM_CHECK_C, data.tds.toString())
 
                             // Set Ppm value on screen
-                            tvTds.text = "${data.tds3} ppm"
+                            tvTds.text = "${data.tds} ppm"
 
                             // Set status
-                            if (data.tds3!! <= 200)
+                            if (data.tds!! <= 200)
                                 tvCurrentStatus.apply {
                                     text = "Normal"
-                                    setTextColor(resources.getColor(R.color.tds_normal))
+                                    setTextColor(
+                                        ContextCompat.getColor(
+                                            context,
+                                            R.color.tds_normal
+                                        )
+                                    )
                                 }
-                            if (data.tds3 > 200 && data.tds3 <= 1300)
+                            if (data.tds > 200 && data.tds <= 1300)
                                 tvCurrentStatus.apply {
                                     text = "Safe"
-                                    setTextColor(resources.getColor(R.color.tds_safe))
+                                    setTextColor(ContextCompat.getColor(context, R.color.tds_safe))
                                 }
-                            if (data.tds3 > 1300 && data.tds3 <= 1700)
+                            if (data.tds > 1300 && data.tds <= 1700)
                                 tvCurrentStatus.apply {
                                     text = "Cautious"
-                                    setTextColor(resources.getColor(R.color.tds_cautious))
+                                    setTextColor(
+                                        ContextCompat.getColor(
+                                            context,
+                                            R.color.tds_cautious
+                                        )
+                                    )
                                 }
-                            if (data.tds3 > 1700) tvCurrentStatus.apply {
+                            if (data.tds > 1700) tvCurrentStatus.apply {
                                 text = "Dangerous"
-                                setTextColor(resources.getColor(R.color.tds_danger))
+                                setTextColor(ContextCompat.getColor(context, R.color.tds_danger))
                             }
 
-                            val percentage = (data.tds3 / 2500) * 100
+                            val percentage = (data.tds / 2500) * 100
                             pbTds.setProgress(percentage.toInt(), true)
                         }
                     }

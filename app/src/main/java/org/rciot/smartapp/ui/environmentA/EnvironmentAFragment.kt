@@ -52,13 +52,12 @@ class EnvironmentAFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         listOfData.clear()
-
         displayLevelTDS()
         setupChart()
         fetchTDSData()
     }
 
-    private fun setupChart() = with(binding.chart) {
+    private fun setupChart() = with(binding.chartA) {
         setNoDataText("No TDS Data")
 
         xAxis.apply {
@@ -112,7 +111,7 @@ class EnvironmentAFragment : Fragment() {
 
         val data = LineData(dataset)
 
-        binding.chart.apply {
+        binding.chartA.apply {
             this.data = data
             this.invalidate()
         }
@@ -124,16 +123,15 @@ class EnvironmentAFragment : Fragment() {
             getStatus().observe(viewLifecycleOwner) { loadingIndicator(it) }
             getDatasetA()
             data.observe(viewLifecycleOwner) {
-                listOfData.clear()
                 if (listOfData.isEmpty()) it.dataList!!.forEach { item -> listOfData.add(item) }
                 val tdsList = ArrayList<String>()
 
-                for (i in 0..40) {
-                    Log.d("chart_dataC", listOfData[i])
+                for (i in 0..10) {
+                    Log.d("chart_dataA", listOfData[i])
 
                     getDeviceData(listOfData[i])
                     deviceData.observe(viewLifecycleOwner) { device ->
-                        Log.d("chart_device_datasetC", "${device.data.con}")
+                        Log.d("chart_device_datasetA", "${device.data.con}")
                         if (device.data.con!!.contains("TDS")) {
 
                             val jsonBody = JSONObject(device.data.con)
@@ -141,12 +139,6 @@ class EnvironmentAFragment : Fragment() {
 
                             tdsList.add(dataTDS)
                         }
-//                        else if (!device.data.con.contains("TDS")) {
-//                            val jsonBody = JSONObject(device.data.con)
-//                            val dataTDS = jsonBody.getString("TDS1")
-//
-//                            tdsList.add(dataTDS)
-//                        }
                         fetchChartData(tdsList)
                         Log.i("list_A", "$tdsList -- ${tdsList.size}")
                     }
@@ -180,7 +172,7 @@ class EnvironmentAFragment : Fragment() {
                             // Set pH level on screen
                             if (data.pH!! >= 1.0 && data.pH < 7.0)
                                 tvLevelAcid.text = getString(R.string.text_acid)
-                            else if (data.pH > 7.0 && data.pH <= 14.0)
+                            else if (data.pH > 7.0)
                                 tvLevelAcid.text = getString(R.string.text_alkaline)
                             else if (data.pH == 7.0)
                                 tvLevelAcid.text = getString(R.string.text_neutral)

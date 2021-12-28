@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.title.text = getString(R.string.title_env_a)
+        binding.title.text = getString(R.string.title_env_a_updated)
 
         val pagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager = binding.viewPager
@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity() {
             override fun onPageScrolled(pos: Int, posOffset: Float, posOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) = when (position) {
-                0 -> binding.title.text = getString(R.string.title_env_a)
-                1 -> binding.title.text = getString(R.string.title_env_b)
-                2 -> binding.title.text = getString(R.string.title_limbah)
+                0 -> binding.title.text = getString(R.string.title_env_a_updated)
+                1 -> binding.title.text = getString(R.string.title_env_b_updated)
+                2 -> binding.title.text = getString(R.string.title_limbah_updated)
                 else -> binding.title.text = getString(R.string.app_name)
             }
 

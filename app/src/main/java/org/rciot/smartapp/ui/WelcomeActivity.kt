@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.rciot.smartapp.databinding.ActivityWelcomeBinding
+import org.rciot.smartapp.ui.auth.LoginActivity
 import org.rciot.smartapp.ui.auth.RegisterActivity
 
 class WelcomeActivity : AppCompatActivity() {
@@ -18,9 +19,10 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this@WelcomeActivity,
-                    RegisterActivity::class.java
+                    MainActivity::class.java
                 )
             )
+            finish()
         }
     }
 }

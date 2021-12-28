@@ -26,7 +26,6 @@ import org.rciot.smartapp.R
 import org.rciot.smartapp.data.*
 import org.rciot.smartapp.data.model.LimbahResponseB
 import org.rciot.smartapp.databinding.FragmentEnvironmentBBinding
-import org.rciot.smartapp.ui.environmentA.EnvAViewModel
 
 class EnviornmentBFragment : Fragment() {
     private lateinit var binding: FragmentEnvironmentBBinding
@@ -46,6 +45,8 @@ class EnviornmentBFragment : Fragment() {
         binding = FragmentEnvironmentBBinding.inflate(layoutInflater, container, false)
         antaresHTTPAPI = AntaresHTTPAPI()
 
+        setupChart()
+
         return binding.root
     }
 
@@ -58,18 +59,25 @@ class EnviornmentBFragment : Fragment() {
         fetchTDSData()
     }
 
-    private fun setupChart() = with(binding.chart) {
+    private fun setupChart() = with(binding.chartB) {
         setNoDataText("No TDS Data")
 
-        xAxis.setDrawLabels(false)
-        xAxis.setDrawAxisLine(false)
-        xAxis.setDrawGridLines(true)
+        xAxis.apply {
+            setDrawLabels(false)
+            setDrawAxisLine(false)
+            setDrawGridLines(true)
+        }
 
-        axisLeft.setDrawGridLines(false)
-        axisLeft.axisMinimum = 0f
-        axisLeft.axisMaximum = 1000f
-        description.isEnabled = false
-        description.text = ""
+        axisLeft.apply {
+            setDrawGridLines(false)
+            axisMinimum = 0f
+            axisMaximum = 1000f
+        }
+
+        description.apply {
+            isEnabled = false
+            text = ""
+        }
 
         animateX(1000, Easing.EaseInSine)
 
@@ -106,7 +114,7 @@ class EnviornmentBFragment : Fragment() {
 
         val data = LineData(dataset)
 
-        binding.chart.apply {
+        binding.chartB.apply {
             this.data = data
             this.invalidate()
         }
@@ -122,16 +130,16 @@ class EnviornmentBFragment : Fragment() {
                 if (listOfData.isEmpty()) it.dataList!!.forEach { item -> listOfData.add(item) }
                 val tdsList = ArrayList<String>()
 
-                for (i in 0..40) {
+                for (i in 0..10) {
                     Log.d("chart_dataB", listOfData[i])
 
                     getDeviceData(listOfData[i])
                     deviceData.observe(viewLifecycleOwner) { device ->
                         Log.d("chart_device_datasetB", "${device.data.con}")
-                        if (device.data.con!!.contains("TDS2")) {
+                        if (device.data.con!!.contains("TDS")) {
 
                             val jsonBody = JSONObject(device.data.con)
-                            val dataTDS = jsonBody.getString("TDS2")
+                            val dataTDS = jsonBody.getString("TDS")
 
                             tdsList.add(dataTDS)
                         }
@@ -159,80 +167,110 @@ class EnviornmentBFragment : Fragment() {
                     handler.post {
                         // pH check
                         with(binding) {
-                            Log.d(ENV_pH_CHECK_B, data.pH2.toString())
+                            Log.d(ENV_pH_CHECK_B, data.pH.toString())
 
                             // Set pH value on screen
-                            tvPhLevel.text = data.pH2.toString()
+                            tvPhLevel.text = data.pH.toString()
 
                             // Set pH level on screen
-                            if (data.pH2!! >= 1.0 && data.pH2 < 7.0)
+                            if (data.pH!! >= 1.0 && data.pH < 7.0)
                                 tvLevelAcid.text = getString(R.string.text_acid)
-                            else if (data.pH2 > 7.0 && data.pH2 <= 14.0)
+                            else if (data.pH > 7.0)
                                 tvLevelAcid.text = getString(R.string.text_alkaline)
-                            else if (data.pH2 == 7.0)
+                            else if (data.pH == 7.0)
                                 tvLevelAcid.text = getString(R.string.text_neutral)
 
                             // Set circular chart percentage on screen
-                            val value = (data.pH2 / 14.0) * 100
+                            val value = (data.pH / 14.0) * 100
                             pbCircularAcid.setProgress(value.toInt(), true)
                         }
 
                         // Water check
                         with(binding) {
-                            Log.d(ENV_WATER_CHECK_B, data.tank2Level.toString())
-                            Log.d(ENV_GATE_CHECK_B, data.gate2Level.toString())
+                            Log.d(ENV_GATE_CHECK_B, data.gateLevel.toString())
 
-                            // Set water & gate value on screen
-                            tvCurrentWater.text = when (data.tank2Level) {
+                            tvCurrentWater.text = when (data.gateLevel) {
                                 0.0 -> "0 cm"
-                                else -> "${data.tank2Level} cm"
-                            }
-                            tvCurrentGate.text = when (data.gate2Level) {
-                                0.0 -> "0 cm"
-                                else -> "${data.gate2Level} cm"
-                            }
-
-                            // Set water pump & gate status
-                            when (data.pump2Status!!.toInt()) {
-                                0 -> switchPump.isChecked = false
-                                1 -> switchPump.isChecked = true
-                            }
-
-                            when (data.gate2Status!!.toInt()) {
-                                0 -> switchGate.isChecked = false
-                                1 -> switchGate.isChecked = true
+                                else -> "${data.gateLevel} cm"
                             }
                         }
 
+                        // Temp Check
+                        with(binding) {
+                            Log.d(ENV_GATE_CHECK_B, data.gateLevel.toString())
+
+                            tvCurrentTemp.text = when (data.temp) {
+                                0.0 -> "0°C"
+                                else -> "${data.temp}°C"
+                            }
+                        }
+
+//                        // Water check
+//                        with(binding) {
+//                            Log.d(ENV_WATER_CHECK_B, data.tank2Level.toString())
+//                            Log.d(ENV_GATE_CHECK_B, data.gate2Level.toString())
+//
+//                            // Set water & gate value on screen
+//                            tvCurrentWater.text = when (data.tank2Level) {
+//                                0.0 -> "0 cm"
+//                                else -> "${data.tank2Level} cm"
+//                            }
+//                            tvCurrentGate.text = when (data.gate2Level) {
+//                                0.0 -> "0 cm"
+//                                else -> "${data.gate2Level} cm"
+//                            }
+//
+//                            // Set water pump & gate status
+//                            when (data.pump2Status!!.toInt()) {
+//                                0 -> switchPump.isChecked = false
+//                                1 -> switchPump.isChecked = true
+//                            }
+//
+//                            when (data.gate2Status!!.toInt()) {
+//                                0 -> switchGate.isChecked = false
+//                                1 -> switchGate.isChecked = true
+//                            }
+//                        }
+
                         // Ppm Check
                         with(binding) {
-                            Log.d(ENV_PPM_CHECK_B, data.tds2.toString())
+                            Log.d(ENV_PPM_CHECK_B, data.tds.toString())
 
                             // Set Ppm value on screen
-                            tvTds.text = "${data.tds2} ppm"
+                            tvTds.text = "${data.tds} ppm"
 
                             // Set status
-                            if (data.tds2!! <= 200)
+                            if (data.tds!! <= 200)
                                 tvCurrentStatus.apply {
                                     text = "Normal"
-                                    setTextColor(resources.getColor(R.color.tds_normal))
+                                    setTextColor(
+                                        ContextCompat.getColor(
+                                            context,
+                                            R.color.tds_normal
+                                        )
+                                    )
                                 }
-                            if (data.tds2 > 200 && data.tds2 <= 1300)
+                            if (data.tds > 200 && data.tds <= 1300)
                                 tvCurrentStatus.apply {
                                     text = "Safe"
-                                    setTextColor(resources.getColor(R.color.tds_safe))
+                                    setTextColor(ContextCompat.getColor(context, R.color.tds_safe))
                                 }
-                            if (data.tds2 > 1300 && data.tds2 <= 1700)
+                            if (data.tds > 1300 && data.tds <= 1700)
                                 tvCurrentStatus.apply {
                                     text = "Cautious"
-                                    setTextColor(resources.getColor(R.color.tds_cautious))
+                                    setTextColor(
+                                        ContextCompat.getColor(
+                                            context,
+                                            R.color.tds_cautious
+                                        )
+                                    )
                                 }
-                            if (data.tds2 > 1700) tvCurrentStatus.apply {
+                            if (data.tds > 1700) tvCurrentStatus.apply {
                                 text = "Dangerous"
-                                setTextColor(resources.getColor(R.color.tds_danger))
+                                setTextColor(ContextCompat.getColor(context, R.color.tds_danger))
                             }
 
-                            val percentage = (data.tds2 / 2500) * 100
+                            val percentage = (data.tds / 2500) * 100
                             pbTds.setProgress(percentage.toInt(), true)
                         }
                     }

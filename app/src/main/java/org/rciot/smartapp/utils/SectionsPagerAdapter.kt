@@ -10,9 +10,9 @@ import org.rciot.smartapp.ui.environmentA.EnvironmentAFragment
 import org.rciot.smartapp.ui.environmentC.EnvironmentCFragment
 
 private val TAB_TITLES = arrayOf(
-    R.string.title_env_a,
-    R.string.title_env_b,
-    R.string.title_limbah
+    R.string.title_env_a_updated,
+    R.string.title_env_b_updated,
+    R.string.title_limbah_updated
 )
 
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
