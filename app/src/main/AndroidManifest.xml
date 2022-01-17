@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IoTSmartApp">
         <activity
+            android:name=".ui.CobaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.IoTSmartApp.NoActionBar" />
