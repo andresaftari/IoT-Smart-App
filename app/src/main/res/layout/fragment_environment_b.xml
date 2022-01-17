@@ -4,12 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.environment.EnvironmentFragment">
+    tools:context=".ui.environmentA.EnvironmentAFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/pb_loading"
+            style="@style/SpinKitView.Circle"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:SpinKit_Color="@color/darkPrimaryColor"
+            android:visibility="visible" />
 
         <!-- Acid Card -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,118 +117,75 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_tds"
             android:layout_width="match_parent"
-            android:layout_height="360dp"
+            android:layout_height="468dp"
             android:layout_gravity="bottom"
             android:layout_marginTop="96dp"
             android:background="@drawable/env_background_chart">
 
             <!-- Water Level -->
             <TextView
-                android:id="@+id/waterLevel"
+                android:id="@+id/gateLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/text_current_water"
                 android:textColor="@color/darkPrimaryColor"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_current_water"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="24dp"
-                android:textColor="#003ED1"
-                android:textSize="25sp"
-                android:textStyle="bold|italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/waterLevel"
-                app:layout_constraintVertical_bias="0.05"
-                tools:text="30 cm" />
-
-            <TextView
-                android:id="@+id/gateLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/text_current_gate"
-                android:textColor="@color/darkPrimaryColor"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_current_water" />
-
-            <TextView
-                android:id="@+id/tv_current_gate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="24dp"
-                android:textColor="#003ED1"
-                android:textSize="25sp"
-                android:textStyle="bold|italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/gateLevel"
-                app:layout_constraintVertical_bias="0.05"
-                tools:text="30 cm" />
-
-            <!-- Water Status -->
-            <TextView
-                android:id="@+id/pumpStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/text_pump_status"
+                android:layout_marginBottom="24dp"
+                android:textColor="#003ED1"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gateLevel"
+                tools:text="30 cm" />
+
+            <TextView
+                android:id="@+id/tempLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_current_temp"
                 android:textColor="@color/darkPrimaryColor"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switch_pump"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pumpStatus" />
-
             <TextView
-                android:id="@+id/gateStatus"
+                android:id="@+id/tv_current_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/text_gate_status"
-                android:textColor="@color/darkPrimaryColor"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/switch_pump" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switch_gate"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/gateStatus" />
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="24dp"
+                android:textColor="#003ED1"
+                android:textSize="25sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tempLevel"
+                app:layout_constraintVertical_bias="0.05"
+                tools:text="30°C" />
 
             <View
                 android:id="@+id/separatorTop"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/primaryColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/switch_gate" />
+                app:layout_constraintTop_toBottomOf="@id/tv_current_temp" />
 
             <!-- Ppm Level -->
             <ProgressBar
@@ -312,15 +278,15 @@
                 app:layout_constraintTop_toBottomOf="@id/pb_tds" />
 
             <!-- Chart -->
-<!--            <com.github.mikephil.charting.charts.LineChart-->
-<!--                android:id="@+id/chart"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/separatorBottom"-->
-<!--                app:layout_constraintStart_toStartOf="parent" />-->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chartB"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separatorBottom" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>

@@ -5,13 +5,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import org.rciot.smartapp.R
-import org.rciot.smartapp.ui.energy.EnergyFragment
-import org.rciot.smartapp.ui.environment.EnvironmentFragment
+import org.rciot.smartapp.ui.environmentB.EnviornmentBFragment
+import org.rciot.smartapp.ui.environmentA.EnvironmentAFragment
+import org.rciot.smartapp.ui.environmentC.EnvironmentCFragment
 
 private val TAB_TITLES = arrayOf(
-    R.string.title_environment,
-    R.string.title_energy,
-    R.string.title_oxygen
+    R.string.title_env_a_updated,
+    R.string.title_env_b_updated,
+    R.string.title_limbah_updated
 )
 
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
@@ -20,8 +21,9 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     override fun getPageTitle(position: Int) = context.resources.getString(TAB_TITLES[position])
 
     override fun getItem(position: Int): Fragment = when (position) {
-        0 -> EnvironmentFragment()
-        1 -> EnergyFragment()
+        0 -> EnvironmentAFragment()
+        1 -> EnviornmentBFragment()
+        2 -> EnvironmentCFragment()
         else -> Fragment()
     }
 
